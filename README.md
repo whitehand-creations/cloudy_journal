@@ -15,8 +15,7 @@ This is a bash script used for encrypted journaling of the user's private though
 - Bash
 - GPG
     - macOS: `brew install gnupg`
-    - Linux: Usually, pre-installed.
-                    - If not: `sudo apt install gnupg` (Debian/Ubuntu), `sudo dnf install gnupg` (Fedora), or `sudo pacman -S gnupg` (Arch)
+    - Linux: Usually, pre-installed. If not: `sudo apt install gnupg` (Debian/Ubuntu), `sudo dnf install gnupg` (Fedora), or `sudo pacman -S gnupg` (Arch)
        
 
 ### License
