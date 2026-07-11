@@ -2,6 +2,14 @@
 
 # This script is used for private journaling. 
 
+# Check for the entries directory
+if [[ -d "entries" ]]; then
+    echo "You have the required directory"
+else
+    echo "Please open a directory called 'entries'"
+    exit 1
+fi
+
 # Add timestamp
 entry_date=$(date +%F)
 entry_time=$(date +%T)
@@ -28,5 +36,5 @@ else
 fi
 
 # Delete plaintext file and move the encrypted file in 'entries'
-rm "${filename}"
+rm -rf "${filename}"
 mv "${filename}.gpg" entries
