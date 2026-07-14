@@ -2,8 +2,8 @@
 
 # This script is used for private journaling.
 
-# Create the entries directory
-mkdir 'entries'
+# Create the entries directory and output to /dev/null for the unnecessary 'directory already exists' error for mkdir
+mkdir 'entries' &> /dev/null
 
 # Check for the entries directory
 if [[ -d "entries" ]]; then
