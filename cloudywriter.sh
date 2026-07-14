@@ -3,7 +3,7 @@
 # This script is used for private journaling.
 
 # Create the entries directory
-mkdir entries
+mkdir 'entries'
 
 # Check for the entries directory
 if [[ -d "entries" ]]; then
