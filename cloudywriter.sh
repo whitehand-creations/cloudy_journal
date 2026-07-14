@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# This script is used for private journaling. 
+# This script is used for private journaling.
+
+# Create the entries directory
+mkdir entries
 
 # Check for the entries directory
 if [[ -d "entries" ]]; then
