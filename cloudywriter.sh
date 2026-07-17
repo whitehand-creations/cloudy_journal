@@ -50,6 +50,7 @@ fi
 # Delete plaintext file and move the encrypted file in 'entries'
 if shred -u "${filename}"; then
     echo "Contents removed from disk"
+    mv "${filename}.gpg" 'entries'
 else
     echo "Unsuccessful in removing plaintext file & its contents from disk"
     exit 1
