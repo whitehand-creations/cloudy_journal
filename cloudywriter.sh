@@ -13,20 +13,28 @@ else
     exit 1
 fi
 
-# Add timestamp
+# Add timestamps as the filename
 entry_date=$(date +%F)
 entry_time=$(date +%T)
 filename="${entry_date}_${entry_time}.txt"
+touch "${filename}" 
 
-# Open the file
-touch "${filename}"
+# Verify the filename exists
+if [[ "${?}" == 0 ]]; then
+    read -p "Enter your thoughts and feelings here: " scribe
+else 
+    echo "Could not create file"
+    exit 1
+fi
+    
+# Verify if the user provided input
 
-# Collect user input
-read -p "Enter your thoughts and feelings here: " scribe
-
-
-# Send the input over to the file
-echo "${scribe}" >> "${filename}"
+if [[ -n "${scribe}" ]]; then 
+    echo "${scribe}" >> "${filename}"
+else
+    echo "Your reponse is empty. Exiting..."
+    exit 1 
+fi 
 
 # Add symmetric encryption. Cipher algorithm will be AES-256
 gpg --symmetric --cipher-algo AES256 "${filename}"
@@ -35,9 +43,14 @@ gpg --symmetric --cipher-algo AES256 "${filename}"
 if [[ "${?}" == 0 ]]; then
     echo "Entry is encrypted"
 else
+    echo "Failed to encrypt entry"
     exit 1 
 fi
 
 # Delete plaintext file and move the encrypted file in 'entries'
-rm -rf "${filename}"
-mv "${filename}.gpg" entries
+if shred -u "${filename}"; then
+    echo "Contents removed from disk"
+else
+    echo "Unsuccessful in removing plaintext file & its contents from disk"
+    exit 1
+fi
